@@ -34,9 +34,8 @@ from pathlib import Path
 
 import sys
 
-if sys.version_info >= (3, 14) or sys.version_info < (3, 10):
-    sys.exit(f"Python {sys.version.split()[0]} detected. Use Python 3.10-3.13 (3.12 recommended): "
-             "some packages (FAISS) don't support newer versions yet. See README.md.")
+if sys.version_info < (3, 10):
+    sys.exit(f"Python {sys.version.split()[0]} detected. Use Python 3.10+: See README.md.")
 
 try:
     import numpy as np
@@ -54,6 +53,15 @@ try:
     from dotenv import load_dotenv
     load_dotenv(HERE / ".env")
 except ImportError:
+    pass
+
+# Also sync Streamlit Cloud secrets (st.secrets) to os.environ
+try:
+    import streamlit as st
+    for _k, _v in getattr(st, "secrets", {}).items():
+        if isinstance(_v, str) and _k not in os.environ:
+            os.environ[_k] = _v
+except Exception:
     pass
 
 # PubMedBERT fine-tuned for search (MS MARCO). Downloads ~440 MB on first use.

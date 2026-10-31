@@ -4,7 +4,7 @@ Ask a medical question in plain English. The app searches PubMed abstracts two w
 
 All the code is in **one file: `app.py`**. The first build creates a `chroma_db` folder next to it: that's the database, managed by Chroma; you never need to open it.
 
-Get the code with `git clone https://github.com/kishoremadanagopal/medical-literature-rag.git`, or on GitHub click **Code → Download ZIP** and unzip it.
+Get the code with `git clone https://github.com/pantanoop/medical-literature-rag-app.git`, or on GitHub click **Code → Download ZIP** and unzip it.
 
 ## Architecture
 
